@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javscript-study-7-函数</title>
+</head>
+
+<body>
+</body>
+<script>
+    function test1(a, b) {
+        console.log(a, b, a + b);
+    }
+    test1();
+
+    /**
+     * 立即执行函数（函数定义完就会立即执行）
+     *  立即执行函数往往只会执行一次
+     */
+    (function () {
+        console.log('我是立即执行函数');
+    })();
+    (function (name, age) {
+        console.log('我叫' + name + '我今年' + age)
+    })('万直鹏', 121)
+
+    var a = 1;
+    /**
+     * 全局作用域
+     *  全局作用域下声明的变量都保存到window对象上
+     */
+    console.log(window)
+
+    var b = 10;
+
+    function fn1() {
+        b = 20;
+        console.log('b', b)
+    }
+    console.log(b);
+    fn1();
+    console.log(b);
+
+
+    /**
+     * 函数作用域
+     */
+    function fn2() {
+        // undefined  声明提前了
+        console.log('b', b);
+        var b = 30;
+    }
+    fn2();
+
+
+    /**
+     * this
+     *  当以函数形式调用时，this=window
+     * 当以方法形式调用时，this=调用对象
+     */
+    function fn3() {
+        console.log('this', this);
+    }
+    var name = '222222';
+    class fn4 {
+        name = '2323';
+        fn5 = function () {
+            console.table('this', this, this.name);
+        }
+    }
+    var fn4Obj = new fn4();
+    fn4Obj.fn5();
+</script>
+
+</html>

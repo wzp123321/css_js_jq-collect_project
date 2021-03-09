@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javscript-study-5-if</title>
+</head>
+
+<body>
+</body>
+<script>
+    var age = 100;
+    if (age > 60) {
+        console.log('我太老了')
+    } else {
+        console.log('我还年轻')
+    }
+
+    function getI() {
+        for (let i = 0; i < 7; i++) {
+            console.log('i', i);
+        }
+    }
+
+    getI();
+
+    /**
+     * break --------终止当前循环
+     * continue --------跳过当次循环
+     */
+
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 5; j++) {
+            if (j === 2) {
+                console.log('跳出循环');
+                break;
+            }
+            console.log('i,j', i, j)
+        }
+    }
+
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 5; j++) {
+            if (j === 2) {
+                console.log('跳出循环');
+                continue;
+            }
+            console.log('i,j', i, j)
+        }
+    }
+</script>
+
+</html>

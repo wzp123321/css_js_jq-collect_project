@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javscript-study-2-语法规范</title>
+</head>
+<body>
+</body>
+<script>
+    /**
+      1.js严格区分大小写
+      2.js每一条语句都以分号结尾
+    */
+    // document.write属于块级元素
+    document.write('js基础语法巩固');
+
+
+    /**
+        1.js基础数据类型
+        2.
+    */
+    var num = 1;
+    document.write('数字num='+num);
+    num = 2;
+    document.write('数字num='+num);
+    100 // 不会报错
+    var count ;
+    console.log(count);
+    var _count = 10;
+    console.log(_count);
+    var $_count = 20;
+    console.log($_count);
+    /**
+     *  闭包
+     */
+    function add(){
+        var num = 10;
+        return function(){
+            num+= 1;
+            alert(num);
+        }
+    }
+
+    var test = add();
+    test();
+    test();
+</script>
+</html>

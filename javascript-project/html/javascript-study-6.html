@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javscript-study-6-对象</title>
+</head>
+
+<body>
+</body>
+<script>
+    /**
+     * 对象分类
+     *   1.内建对象
+     *   2.宿主对象
+     *   3.自定义对象
+     */
+    const obj = new Object();
+    obj.age = 12;
+    obj['12'] = 122;
+    console.log(obj, typeof obj)
+
+    /**
+     * js中变量都是存在栈内存中的
+     *  基本数据类型的值直接在栈内存中保存
+     */
+    var a = 123;
+    var b = a;
+    c = a;
+    a++;
+    console.log(b, c)
+
+    /**
+     * 创建对象的时候就会在堆内存中开辟一个新空间，而变量保存的是对象的引用地址  如果两个变量用同1个对象引用，当一个通过变量修改了对象属性 ，另一个也会受到影响
+     */
+    var o = new Object();
+    o.name = 'zp';
+    var b = o;
+    console.log(o, b);
+    o.name = 'yz';
+    console.log(o, b);
+    var j = new Object();
+    j.name = 'dd';
+    b.name = 'ff';
+    console.log(o, b, j);
+    o = null;
+    console.log(o, b, j, Object.prototype.toString.call(b) === '[object Object]', b == j);
+
+
+
+    /**
+     * 构造函数的执行流程
+     *    1.立刻创建一个新的对象
+     *    2.将新建的对象设置为函数中的this
+     *    3.逐行执行函数中的代码
+     *    4.将新建的对象座位返回值返回
+     */
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.getName = getName;
+    function getName(){
+        console.log(this.name)
+    }
+    var p = new Person('小砸hng', 12);
+    var p1 = new Person('小王', 2);
+    p.getName();
+    p1.getName();
+    console.log(p, p.name, p.__proto__);
+</script>
+
+</html>
