@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>javascript-study-10-call-apply</title>
+  </head>
+
+  <body></body>
+  <script>
+    /**
+     * 在使用call apply调用函数时，可以将一个对象指定为第一个参数，此时这个对象将成为函数执行时的this
+     * call  可以改变this指向   传参用，隔开
+     * apply 可以改变thi指向  参数用数组传递
+     * 
+     * 
+     * 在调用函数时，浏览器默认会传两个隐含的参数
+     *  1.this
+     *  2.arguments
+     *          arguments是一个类数组对象，它可以通过索引来操作对象
+     */
+    function fn1(value1, value2) {
+      console.log("arguments", arguments);
+      console.log("this----------------", this, value1, value2);
+    }
+
+    fn1.apply(window, ["12121", 21212]);
+    function Person() {}
+    var p = new Person();
+    fn1.call(p, "121", 121);
+  </script>
+</html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>javscript-study-8-原型</title>
+    <title>javascript-study-8-原型</title>
 </head>
 
 <body>
@@ -22,6 +22,24 @@
     *       自身如果有则直接使用
     *       自身如果没有则去原型对象中找，如果原型对象中有则使用，如果没有则去原型的原型仲找，
     *       直到object对象的原型 ，object的原型没有原型，如果依然没有找到则返回undefined
+    */
+   function Person(name,age){
+       this.name = name;
+       this.age = age;
+   }
+   Person.prototype.toString = function(){
+       return '我是重写的toString'
+   }
+   var p1 = new Person('1111',121);
+   console.log(p1.toString);
+
+
+
+   /**
+    * 垃圾回收GC
+    *   当一个对象没有任何变量或者属性对其进行引用，此时我们将永远无法操作该对象
+    *   此时这种对象就是垃圾，这种对象过多会造成程序变卡
+    * 在js中有自动的垃圾回收机制，会自动将对象回收
     */
 </script>
 
