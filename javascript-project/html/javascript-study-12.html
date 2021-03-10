@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>javascript-study-12-dom增删改</title>
+  <style>
+    div span {
+      padding: 6px 12px;
+      border: 1px solid #eee;
+      margin: 0 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="country-wrapper">
+    <span>中国</span>
+    <span>韩国</span>
+    <span>日本</span>
+    <span>泰国</span>
+  </div>
+  <table border>
+    <thead>
+      <th>姓名</th>
+      <th>年龄</th>
+      <th>生日</th>
+      <th>操作</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>张三</td>
+        <td>18</td>
+        <td>1999.0202</td>
+        <td><a href="javascript:;">删除</a></td>
+      </tr>
+      <tr>
+        <td>李四</td>
+        <td>14</td>
+        <td>1939.0202</td>
+        <td><a href="javascript:;">删除</a></td>
+      </tr>
+      <tr>
+        <td>王五</td>
+        <td>22</td>
+        <td>1939.0202</td>
+        <td><a href="javascript:;">删除</a></td>
+      </tr>
+    </tbody>
+  </table>
+  用户名 <input type="text" name='username' id="username"><br />
+  年龄 <input type="text" name='age' id="age"><br />
+  生日 <input type="text" name='birthday' id="birthday"><br />
+  <input type="button" name="btn" id="btn" value="提交">
+  <script>
+    /**
+     * appendChild  添加子节点
+     * removeChild  移除子节点    父节点.removeChild(节点)/节点.parentNode.removeChild(节点)
+     * replaceChild 替换子节点    父节点.replaceChild(新节点，旧节点);
+     * insertBefore 指定的子节点前插入新的节点   父节点.insertBefore(新节点，旧节点);
+     * createElement 创建一个节点
+     */
+    var countryDiv = document.getElementsByClassName('country-wrapper')[0];
+    var countEle = document.createElement('span');
+    countEle.innerText = '柬埔寨';
+
+    var tbodyEle = document.getElementsByTagName('tbody')[0];
+    var delEles = document.getElementsByTagName('a');
+    for (var i = 0; i < delEles.length; i++) {
+      delEles[i].onclick = delA;
+    }
+
+
+    function delA(e) {
+      console.log(e.target.parentNode.parentNode);
+      tbodyEle.removeChild(e.target.parentNode.parentNode);
+    }
+
+    commonClick('btn', function () {
+      var name = document.getElementById('username').value
+      var age = document.getElementById('age').value
+      var birth = document.getElementById('birthday').value
+
+      var tbodyEle = document.getElementsByTagName('tbody')[0];
+      var trEle = document.createElement('tr');
+      trEle.innerHTML = '<td>'+name+'</td><td>'+age+'</td><td>'+birth+'</td><td><a href="javascript:;" >删除</a></td>';
+      trEle.getElementsByTagName('a')[0].onclick = delA;
+      tbodyEle.appendChild(trEle);
+    })
+    /**
+     * 公共点击事件
+     */
+    function commonClick(str, fn) {
+      var ele = document.getElementById(str);
+      ele.onclick = fn;
+    }
+  </script>
+
+</html>

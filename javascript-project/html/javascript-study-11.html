@@ -1,29 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>javascript-study-11-dom</title>
-  </head>
 
-  <body>
-    <div onclick="test()">11111111</div>
-  </body>
-  <script>
-    /**
-     * 获取元素节点
-     * getElementById() 获取一个元素节点
-     * getElementsByClass() 获取一组元素节点
-     * getElementsByTagName() 获取一组元素节点
-     * getElementsByName()  获取一组元素节点
-     */
-    function test() {
-      console.log(1111111);
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>javascript-study-11-dom查询</title>
+  <style>
+    .wrapper {
+      width: 600px;
+      height: 360px;
+      margin: 0 auto;
     }
 
-    document.getElementsByTagName('div')[0].addEventListener('click',function(){
-      console.log(2222222);
+    .wrapper img {
+      width: 100%;
+      height: 300px;
+    }
+
+    .wrapper .btn-wrapper {
+      text-align: center;
+      padding: 12px 0;
+      z-index: 999;
+    }
+
+    .wrapper .btn-wrapper span {
+      cursor: pointer;
+      padding: 6px 10px;
+      border: 1px solid #999;
+      margin: 0 12px;
+      transition: all 300ms;
+    }
+
+    .wrapper .btn-wrapper span:hover {
+      opacity: .6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <img src="" alt="">
+    <div class="btn-wrapper">
+      <span class="pre">上一张</span>
+      <span class="next">下一张</span>
+    </div>
+  </div>
+  <ul>
+    <li>我是第一个元素</li>
+    <li>我是第二个元素</li>
+    <li>我是第三个元素</li>
+    <li>我是第四个元素</li>
+    <li>我是第五个元素</li>
+  </ul>
+  <div>
+    <div>
+      <input type="checkbox" name="items" value="lol">lol
+      <input type="checkbox" name="items" value="乒乓球">乒乓球
+      <input type="checkbox" name="items" value="篮球">篮球
+      <input type="checkbox" name="items" value="全选">睡觉
+    </div>
+    <div>
+      <input type="button" name="checkall" data-check='true' value="全选">
+      <input type="button" name="checkall" data-check='false' value="全不选">
+      <input type="button" name="reversecheck" value="反选">
+    </div>
+  </div>
+</body>
+<script>
+  var imagesList = [
+    '/static/images/006rPqrTgy1g4lsgz4bzjj30ku0gt0v3.jpg',
+    '/static/images/03e6a3b6-e58c-4fc0-943b-891fa6e96c9e.jpg',
+    '/static/images/0_2046775_367ee7abf0d638110f0c3f769dbd8d6e.jpg',
+    '/static/images/0_2046775_85120a14b9b4ec4a35efe3f60d045459.jpg',
+    '/static/images/4ce338a7-3357-47fa-92fd-001d69b6a57a.jpg'
+  ];
+  var imgIndex = 0;
+  /**
+   * 获取元素节点
+   * getElementById() 获取一个元素节点
+   * getElementsByClass() 获取一组元素节点
+   * getElementsByTagName() 获取一组元素节点
+   * getElementsByName()  获取一组元素节点
+   */
+  /**
+   * 属性
+   *  childNodes  获取元素的包括文本在内的所有子节点
+   *  children    获取当前元素所有子元素
+   *  firstChild  获取元素的第一个子节点
+   *  firstElementChild 获取元素的第一个子元素
+   *  lastChild   获取元素的最后一个子节点
+   *  lastElementChild   获取元素的最后一个子元素
+   *  parentNode 获取当前节点的父节点
+   *  previousSibling 获取当前节点的前一个兄弟节点
+   *  nextSibling 获取当前节点的后一个兄弟节点
+   */
+  window.onload = function () {
+    onBindImageUrl(imgIndex);
+
+    var btnEle = document.getElementsByClassName('btn-wrapper')[0];
+    btnEle.addEventListener('click', function (e) {
+      var className = e.target.className;
+      switch (className) {
+        case 'next':
+          imgIndex++;
+          imgIndex = imgIndex % imagesList.length;
+          onBindImageUrl(imgIndex);
+          break;
+        case 'pre':
+          imgIndex--;
+          imgIndex = imgIndex < 0 ? imagesList.length - 1 : imgIndex;
+          onBindImageUrl(imgIndex);
+          break;
+        default:
+          onBindImageUrl(imgIndex);
+      }
     })
-  </script>
+
+    console.log('btnEle.childNodes-------------', btnEle.childNodes);
+    console.log('btnEle.children---------------', btnEle.children);
+    console.log('btnEle.firstChild-------------', btnEle.firstChild);
+    console.log('btnEle.firstElementChild------', btnEle.firstElementChild);
+
+
+
+    var ulEle = document.getElementsByTagName('ul')[0];
+    console.log('ulEle.firstElementChild.parentElement---------', ulEle.firstElementChild.parentElement);
+    console.log('ulEle.firstElementChild.parentNode---------', ulEle.firstElementChild.parentNode);
+    console.log('ulEle.firstElementChild.nextSibling---------', ulEle.firstElementChild.nextSibling);
+    console.log('ulEle.firstElementChild.nextSibling.previousSibling---------', ulEle.firstElementChild.nextSibling
+      .previousSibling);
+
+    var checkallEle = document.getElementsByName('checkall');
+    var reverseEle = document.getElementsByName('reversecheck')[0];
+    checkallEle.forEach(item => {
+      item.addEventListener('click', function (e) {
+        console.log(e.target)
+        allCheck(e.target.getAttribute('data-check'))
+      })
+    })
+    reverseEle.addEventListener('click', function () {
+      items.forEach(item => {
+        item.checked = !item.checked;
+      })
+    })
+
+    var items = document.getElementsByName('items')
+    /**
+     * 统一处理
+     */
+    function allCheck(value) {
+      items.forEach(item => {
+        item.checked = value === 'true';
+      })
+    }
+  }
+
+  /**
+   * 绑定图片
+   */
+  function onBindImageUrl(index) {
+    var imgEle = document.getElementsByTagName('img')[0];
+    imgEle.src = imagesList[index];
+  }
+</script>
+
 </html>

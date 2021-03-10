@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>javascript-study-14-事件对象</title>
+  <style>
+    .wrapper {
+      position: relative;
+    }
+
+    .area {
+      width: 600px;
+      height: 360px;
+      border: 1px solid #999;
+    }
+
+    .box {
+      width: 10px;
+      height: 10px;
+      background-color: yellow;
+      position: absolute;
+      display: none;
+    }
+
+    .parent {
+      width: 600px;
+      height: 400px;
+      background-color: tomato;
+    }
+
+    .son {
+      width: 600px;
+      height: 200px;
+      background-color: violet;
+    }
+
+    .zy {
+      width: 600px;
+      height: 100px;
+      background-color: yellow;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="area"></div>
+    <div class="message"></div>
+    <div class="box"></div>
+
+
+    <div class="parent">
+      parent
+      <div class="son">
+        son
+        <div class="zy">
+          zy
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+
+    <div class="bind">bind</div>
+  </div>
+  <script>
+    /**
+     * 事件对象
+     *    当事件的响应函数被触发时，浏览器每次都会将一个事件对象作为实参传递进响应函数
+     *    在事件对象中封装了当前时间相关的一切信息，比如鼠标的坐标 键盘按键。。。。
+     * 
+     * 
+     * clientX  clientY
+     * pageX  pageY
+     * 
+     * 
+     */
+    window.onload = function () {
+      var areaEle = document.getElementsByClassName('area')[0];
+      var messageEle = document.getElementsByClassName('message')[0];
+      var boxEle = document.getElementsByClassName('box')[0];
+      areaEle.addEventListener('mousemove', function (e) {
+        var clientX = e.pageX;
+        var clientY = e.pageY;
+        boxEle.style.display = 'inline-block';
+        boxEle.style.top = (clientY - 10) + 'px';
+        boxEle.style.left = (clientX - 10) + 'px';
+        messageEle.innerHTML = '当前位置x:' + clientX + 'y:' + clientY;
+      });
+
+
+      /**
+       * 事件冒泡：向下传递
+       * e.cancelBubble 阻止事件冒泡
+       */
+      var parentEle = document.getElementsByClassName('parent')[0];
+      var sonEle = document.getElementsByClassName('son')[0];
+      var zyEle = document.getElementsByClassName('zy')[0];
+      parentEle.onclick = function () {
+        console.log(1)
+      }
+      sonEle.onclick = function () {
+        console.log(2)
+      }
+      zyEle.onclick = function (e) {
+        e.cancelBubble = true;
+        console.log(3)
+      }
+
+
+      /**
+       * 事件委托   将一类事件委托到元素的共同的祖先元素
+       */
+      var ulEle = document.getElementsByTagName('ul')[0];
+      ulEle.onclick = function (e) {
+        console.log(e.target)
+      }
+
+
+
+      /**
+       * 定义一个函数 用来为指定元素绑定响应函数
+       * 参数：
+       *  obj   要绑定事件的对象
+       *  eventStr    事件名
+       *  callback    回调函数
+       */
+      function bind(obj, eventStr, callback) {
+        if (obj.addEventListener) {
+          obj.addEventListener(eventStr, callback, false);
+        } else {
+          obj.attachEvent('on' + eventStr, function () {
+            callback.call(obj);
+          });
+        }
+      }
+
+      bind(document.getElementsByClassName('bind')[0], 'click', function () {
+        console.log(1212)
+      })
+    }
+  </script>
+</body>
+
+</html>

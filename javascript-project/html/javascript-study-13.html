@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>javascript-study-13-元素样式</title>
+  <style>
+    .country-wrapper {
+      width: 400px;
+      height: 240px;
+      background-color: yellow;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="country-wrapper">
+  </div>
+  <button onclick="showStyle()">显示</button>
+  <script>
+    /**
+     * 元素.currentStyle    用来读取当前元素正在显示的样式
+     * clientWidth / clientHeight  元素的可见宽度高度 
+     */
+    window.onload = function () {}
+
+    function showStyle() {
+      // document.getElementsByClassName('country-wrapper')[0].style.width = '300px';
+      console.log(document.getElementsByClassName('country-wrapper')[0].width )
+    }
+  </script>
+
+</html>
