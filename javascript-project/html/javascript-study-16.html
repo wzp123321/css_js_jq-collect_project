@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/css/reset.css">
+  <link rel="stylesheet" href="/static/css/swiper.css">
+  <title>javascript-study-16-swiper</title>
+  <style>
+    body {
+      padding-top: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="swiper">
+    <div class="swiper-content">
+      <div class="swiper-item">
+        <img src="/static/images/006rPqrTgy1g4lsgz4bzjj30ku0gt0v3.jpg" alt="">
+      </div>
+      <div class="swiper-item">
+        <img src="/static/images/03e6a3b6-e58c-4fc0-943b-891fa6e96c9e.jpg" alt="">
+      </div>
+      <div class="swiper-item">
+        <img src="/static/images/0_2046775_367ee7abf0d638110f0c3f769dbd8d6e.jpg" alt="">
+      </div>
+      <div class="swiper-item">
+        <img src="/static/images/0_2046775_85120a14b9b4ec4a35efe3f60d045459.jpg" alt="">
+      </div>
+      <div class="swiper-item">
+        <img src="/static/images/4ce338a7-3357-47fa-92fd-001d69b6a57a.jpg" alt="">
+      </div>
+    </div>
+    <!-- 指针  -->
+    <div class="pointer">
+      <span class="pointer-item" key="0"></span>
+      <span class="pointer-item" key="1"></span>
+      <span class="pointer-item" key="2"></span>
+      <span class="pointer-item" key="3"></span>
+      <span class="pointer-item" key="4"></span>
+    </div>
+  </div>
+  <script>
+    window.onload = function () {
+      var curIndex = 0;
+      var swiperContentEle = document.getElementsByClassName('swiper-content')[0];
+      var pointerEles = document.getElementsByClassName('pointer-item');
+      var timer = null;
+      onPointer(curIndex);
+
+      /**
+       * 启动定时器
+       */
+      timer = setInterval(() => {
+        curIndex++;
+        onSwiper(curIndex);
+      }, 3000);
+      /**
+       * 轮播
+       */
+      function onSwiper(index) {
+        curIndex = index %( pointerEles.length );
+        console.log(curIndex)
+        swiperContentEle.style.left = curIndex * (-605) + 'px';
+        onPointer(curIndex);
+      }
+
+      /**
+       * 指针监听
+       */
+      for (let i = 0; i < pointerEles.length; i++) {
+        pointerEles[i].onclick = function (e) {
+          onPointer(Number(e.target.getAttribute('key')));
+          onSwiper(Number(e.target.getAttribute('key')));
+          clearInterval(timer);
+          timer = setInterval(() => {
+            curIndex++;
+            onSwiper(curIndex);
+          }, 3000);
+        }
+      }
+      // 指针高亮
+      function onPointer(index) {
+        for (var i = 0; i < pointerEles.length; i++) {
+          if (i !== index) {
+            pointerEles[i].classList.remove('pointer-item-active');
+          } else {
+            pointerEles[i].classList.add('pointer-item-active');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
