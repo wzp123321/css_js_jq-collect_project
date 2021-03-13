@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
+    <input type="text">
+    <button class="btn1">原生获取value</button>
+    <button class="btn2">jQuery获取value</button>
+    <div id='test'>22</div>
+    <div id='test'>11</div>
 </body>
+
+<script src="../plugins/jquery.min.3.6.0.js"></script>
 <script>
-    window.onload = function(){
-        console.log($)
+    window.onload = function () {
+        var btn = document.getElementsByClassName('btn1')[0];
+        btn.onclick = function () {
+            var intputEle = document.getElementsByTagName('input')[0];
+            alert(intputEle.value);
+        }
     }
+    $(function () {
+        $('#test').click(function(){
+            console.log(2323)
+        })
+        $('.btn2').click(function () {
+            console.log(121)
+            alert($('input').val())
+        })
+    })
 </script>
-<script src="/plugins/jquery.min.3.6.0.js"></script>
+
 </html>
