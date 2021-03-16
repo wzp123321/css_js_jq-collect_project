@@ -102,6 +102,105 @@
       }
       return copyResult;
     }
+
+
+    function A() {}
+
+    A.prototype.n = 1;
+    let db = new A();
+    A.prototype = {
+      n: 2,
+      m: 4
+    };
+    let c = new A();
+    console.log(db.m, db.n, c.m, c.n);
+
+
+    function T() {}
+    Object.prototype.a = function () {
+      console.log('a');
+    }
+    Function.prototype.b = function () {
+      console.log('b');
+    }
+    let t = new T();
+    t.a();
+    // t.b();
+    T.a();
+    T.b();
+
+    /**
+     * 变量提升：通过var声明的变量 在定义语句之前就可以使用，值为undefined
+     *    通过function声明的函数，在之前就可以调用，值为函数定义
+     */
+    var e = 3;
+    tt(2, 3, 4);
+
+    function tt() {
+      console.log(e);
+      console.log(typeof arguments);
+      var e = 4;
+    }
+
+    console.log('gb-----', i);
+    var i = 0;
+    foo(i);
+
+    function foo(i) {
+      if (i === 4) {
+        return
+      }
+      console.log('gc-----', i);
+      foo(i + 1);
+      console.log('gd-----', i);
+    }
+    console.log('ge-----', i);
+
+    /**
+     * 函数在变量之前声明
+     */
+    // var y = 1;
+    // function y(i){
+    //   console.log(i);
+    // }
+    // y(1); // 报错
+
+
+    for (var j = 0; j < 3; j++) {
+
+      (function (j) {
+        console.log(j);
+      })(j)
+    }
+    console.log('j', j);
+
+    /**
+     * 继承：子类的原型指向父类型的实例
+     */
+    function Parent() {}
+    Parent.prototype.test = function () {
+      console.log('test');
+    }
+
+    function Child() {
+
+    }
+    Child.prototype = new Parent();
+    var child = new Child();
+    child.test();
+
+    /**
+     * 浏览器内核模块组成
+     *    主线程：
+     *        js引擎模块：负责js程序的编译与运行
+     *        html、css文档解析模块：负责页面文本解析
+     *        dom/css模块：负责dom/css在内存中的相关处理
+     *        布局和渲染模块：负责页面的布局和效果的绘制
+     *    分线程：
+     *        定时器模块：负责定时器管理
+     *        事件响应模块：负责事件的管理
+     *        网络请求模块：负责ajax请求
+     */ 
   </script>
 </body>
 
