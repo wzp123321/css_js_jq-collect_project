@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>javascript-study-数据类型-深浅拷贝</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 基本数据类型：Number、String、Boolean、undefined、null、symbol
+     * 引用数据类型：Object、Array、Function
+     * 
+     * 基本数据类型是存储在栈中
+     * 引用类型是存储在堆中
+     * 
+     * 赋值：相当于在两个变量指向同一个内存地址
+     * 浅拷贝：在堆中复制一份，两个对象之间基本类型属性不相互影响，引用类型属性改变相互影响
+     * 深拷贝：在堆中拷贝一份，递归拷贝属性，两个对象之间不相互影响
+     */
+    var a = 10;
+    b = a;
+    console.log(a, b);
+    b = 23;
+    console.log(a, b);
+
+    var obj = {
+      id: 1,
+      name: '2323',
+      child: {
+        id: 1
+      }
+    }
+    var obj1 = obj;
+    obj1.id = 22;
+    obj1.child.id = 232;
+    console.log(obj, obj1);
+
+    var obj2 = {
+      id: 1,
+      name: '2323',
+      child: {
+        id: 1
+      }
+    }
+    var obj3 = shallowCopy(obj2);
+    obj2.id = 24;
+    obj2.child.id = 23232
+    console.log(obj2, obj3);
+
+
+    var obj4 = {
+      id: 1,
+      name: '2323',
+      child: {
+        id: 1
+      }
+    }
+    var obj5 = deepCopy(obj4);
+    obj4.id = 24;
+    obj4.child.id = 23232
+    console.log(obj5, obj4);
+
+    // 深拷贝
+    var obj6 = {
+      id: 1,
+      name: '2323',
+      child: {
+        id: 1
+      }
+    }
+    var obj7 = JSON.parse(JSON.stringify(obj6));
+    obj6.id = 24;
+    obj6.child.id = 23232
+    console.log('obj7, obj6', obj7, obj6);
+
+
+    /**
+     * 浅拷贝
+     */
+    function shallowCopy(obj) {
+      var copyResult = {};
+      for (var key in obj) {
+        copyResult[key] = obj[key];
+      }
+      return copyResult
+    }
+    /**
+     * 深拷贝
+     */
+    function deepCopy(obj) {
+      var copyResult = {};
+      for (let key in obj) {
+        if (Object.prototype.toString.call(obj[key]) === '[object Object]') {
+          copyResult[key] = deepCopy(obj[key]);
+        } else {
+          copyResult[key] = obj[key];
+        }
+      }
+      return copyResult;
+    }
+  </script>
+</body>
+
+</html>

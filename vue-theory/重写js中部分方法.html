@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重写js部分方法</title>
+</head>
+
+<body>
+    <script text="text/javascript">
+        /**
+         * Object.create  创建一个新的对象 使用现有对象来提供新创建的对象的__proto__
+         */
+        Function.prototype.myCall = function (context, ...args) {
+            // 设置第一个参数的默认值为window
+            const ctx = context || window;
+            // 设置唯一变量
+            const fn = Symbol('fn');
+            ctx[fn] = this;
+            const result = ctx[fn](...args);
+            // 执行之后得到返回值之前先删除本次声明的属性
+            delete ctx[fn];
+            return result;
+        }
+
+        Function.prototype.myApply = function (context, args) {
+            // 设置第一个参数的默认值为window
+            const ctx = context || window;
+            // 设置唯一变量
+            const fn = Symbol('fn');
+            ctx[fn] = this;
+            const result = ctx[fn](...args);
+            // 执行之后得到返回值之前先删除本次声明的属性
+            delete ctx[fn];
+            return result;
+        }
+        Function.prototype.myBind = function (context, ...args) {
+            const that = this;
+            const funcBind = function () {
+                const target = this instanceof context ? this : context;
+                const applyArgs = args.concat([...arguments]);
+                that.apply(target, applyArgs);
+            }
+            funcBind.prototype = Object.create(that.prototype);
+            return funcBind;
+        }
+        /**
+         * 创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。MDN释义
+         * 创建一个空对象
+         * 使这个新对象继承其构造函数的原型
+         * 执行构造函数并绑定新的this指向
+         * 如果该函数本身有返回对象则直接返回，否则返回新创建的对象
+         */
+        function myNew(func, ...args) {
+            let obj = Object.create(func.prototype);
+            let result = func.apply(obj, args);
+            return Object.prototype.toString.call(result) === '[object Object]' ? result : obj;
+        }
+        /**
+         * 柯里化是指将一个接受多个参数的函数转换为固定部分参数，然后返回一个接受剩余参数的函数。
+         */
+        function curry(fn) {
+            return function recursive(...args) {
+                if (fn.length > args.length) {
+                    return (...rest) => recursive(...args, ...rest);
+                } else {
+                    return fn(...args);
+                }
+            }
+        }
+        /**
+         * 防抖
+         */
+        function debounce(fn, await = 200) {
+            if (typeof fn !== 'function') {
+                throw new Error('fn必须是一个函数');
+            }
+            let timer = null;
+            return function () {
+                let context = this;
+                let args = arguments;
+                if (timer) {
+                    clearTimeout(timer)
+                };
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, await);
+            }
+        }
+        /**
+         * 节流
+         */
+        function throttle(fn, await = 200) {
+            if (typeof fn !== 'function') {
+                throw new Error('fn必须是一个函数');
+            }
+            let timer = null;
+            return function () {
+                let context = this;
+                let args = arguments;
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        timer = null;
+                        fn.apply(context, args);
+                    }, await);
+                }
+
+            }
+        }
+        /**
+         * 浅拷贝
+         */
+        function shallowCopy(obj) {
+            var copyResult = {};
+            for (var key in obj) {
+                copyResult[key] = obj[key];
+            }
+            return copyResult
+        }
+        /**
+         * 深拷贝
+         */
+        function deepCopy(obj) {
+            var copyResult = {};
+            for (let key in obj) {
+                if (Object.prototype.toString.call(obj[key]) === '[object Object]') {
+                    copyResult[key] = deepCopy(obj[key]);
+                } else {
+                    copyResult[key] = obj[key];
+                }
+            }
+            return copyResult;
+        }
+        /**
+         * 
+        //  */
+        // function observe(data) {
+        //     if (!data || typeof data !== 'object' || Object.keys(data).length === 0) {
+        //         return;
+        //     }
+        //     Object.keys(data).forEach(item => {
+        //         if (Object.prototype.toString.call(data[item]) === '[object Object]') {
+        //             observe(data[item]);
+        //         } else {
+        //             Object.defineProperty(data, item, {
+        //                 enumerable: true,
+        //                 configurable: true,
+        //                 get: function () {
+        //                     return val
+        //                 },
+        //                 set: function (newValue) {
+        //                     val = newValue;
+        //                     console.log(item);
+        //                     console.log('当前属性' + item + '被修改' + newValue+'当前属性是'+JSON.stringify(data));
+        //                 }
+        //             })
+        //         }
+        //     })
+        // }
+
+        // var obj = {
+        //     id: 1,
+        //     name: '121',
+        //     child: {
+        //         id: 1,
+        //         name: '121'
+        //     }
+        // };
+        // observe(obj);
+        // obj.id = 1;
+        // obj.name = '232';
+        // obj.child.id = 2;
+    </script>
+</body>
+
+</html>

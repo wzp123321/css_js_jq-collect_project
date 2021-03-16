@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，
+         * 因此提供了一种机制，可以对外界的访问进行过滤和改写。
+         * Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。
+         * 
+         * 
+         * 第一个参数是所要代理的目标对象（上例是一个空对象），即如果没有Proxy的介入，操作原来要访问的就是这个对象；
+         * 第二个参数是一个配置对象，对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作。
+         * 
+         * proxy有13种拦截方法
+         */
+        var proxy = new Proxy({}, {
+            get: function (target, propKey) {
+                return 35
+            }
+        })
+
+        let obj = Object.create(proxy);
+        console.log(obj.time);
+    </script>
+</body>
+
+</html>
