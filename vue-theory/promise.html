@@ -21,17 +21,47 @@
          * 如果回调函数中没有改变新的promise的状态----则中断
          *    
          */
-        var p = new Promise((resolve, reject) => {
-            resolve(1)
-        });
-        p.then(
-            value => {
-                console.log('resolved', value);
-            },
-            error => {
-                console.log('rejected', error);
+        // var p = new Promise((resolve, reject) => {
+        //     resolve(1)
+        // });
+        // p.then(
+        //     value => {
+        //         console.log('resolved1', value);
+        //         throw 3
+        //     },
+        //     error => {
+        //         console.log('rejected1', error);
+        //     }
+        // ).then(
+        //     value => {
+        //         console.log('resolved2', value);
+        //     },
+        //     // error => {
+        //     //     console.log('rejected2', error);
+        //     // }
+        // ).catch(reason=>{
+        //     console.log('catch----------',reason);
+        // })
+
+        // Promise.resolve(1).then(
+        //     value=>{
+        //         console.log(value);
+        //     },
+        //     reason=>{
+        //         console.log(reason);
+        //     }
+        // );
+
+        let promiseArr = [
+            Promise.resolve(1),
+            Promise.reject(2)
+        ];
+        Promise.race(promiseArr).then(
+            res=>{
+                console.log(res);
             }
-        )
+        );
+
     </script>
 </body>
 
