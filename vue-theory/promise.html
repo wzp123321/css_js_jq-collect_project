@@ -21,9 +21,17 @@
          * 如果回调函数中没有改变新的promise的状态----则中断
          *    
          */
-        let p = new Promise((resolve,reject)=>{
+        var p = new Promise((resolve, reject) => {
             resolve(1)
         });
+        p.then(
+            value => {
+                console.log('resolved', value);
+            },
+            error => {
+                console.log('rejected', error);
+            }
+        )
     </script>
 </body>
 
