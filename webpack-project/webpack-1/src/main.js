@@ -14,5 +14,7 @@
  *      2.生产环境和测试环境将es6模块化编译成浏览器能够识别的模块化
  *      3.生产环境比测试环境多了一个压缩js代码
  */
+import '../assets/index.less';
+import '../assets/index.css';
 import json from "../assets/data.json";
 console.log("我是入口文件main.js", json);
