@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>半圆</title>
+    <style>
+      .test1 {
+        width: 100px;
+        height: 50px;
+        border-radius: 0 0 50px 50px;
+        background-color: red;
+      }
+
+      .test2 {
+        width: 100px;
+        height: 50px;
+        border-radius: 50px 50px 0 0;
+        background-color: red;
+      }
+
+      .test3 {
+        width: 50px;
+        height: 100px;
+        border-radius: 0 50px 50px 0;
+        background-color: red;
+      }
+
+      .test4 {
+        width: 50px;
+        height: 100px;
+        border-radius: 50px 0 0 50px;
+        background-color: red;
+      }
+      .parent {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-direction: row;
+      }
+      .parent .child-1,
+      .parent .child-3 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+      .parent .child-2 {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0%;
+        background-color: yellow;
+        height: 100px;
+      }
+      .parent-1{
+          display: flex;
+          flex-direction: row;
+      }
+      .parent-1,
+      .parent-3 {
+        width: 100%;
+        height: 100px;
+        position: relative;
+      }
+      .parent-1 .child-1,
+      .parent-1 .child-3 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+      .parent-1 .child-2 {
+        width: calc(100% - 200px);
+        height: 100px;
+        background-color: yellow;
+      }
+
+      .parent-3 .child-1,
+      .parent-3 .child-3 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+      }
+      .parent-3 .child-1 {
+        left: 0;
+      }
+      .parent-3 .child-3 {
+        right: 0;
+      }
+      .parent-3 .child-2 {
+        margin: 0 100px;
+        height: 100px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test1"></div>
+    <div class="test2"></div>
+    <div class="test3"></div>
+    <div class="test4"></div>
+
+    <div class="parent">
+      <div class="child-1"></div>
+      <div class="child-2"></div>
+      <div class="child-3"></div>
+    </div>
+
+    <div class="parent-1">
+      <div class="child-1"></div>
+      <div class="child-2"></div>
+      <div class="child-3"></div>
+    </div>
+
+    <div class="parent-3">
+      <div class="child-1"></div>
+      <div class="child-2"></div>
+      <div class="child-3"></div>
+    </div>
+  </body>
+</html>
