@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css定位</title>
+    <style>
+      .relative-parent {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        border: 1px solid;
+        top: 10px;
+      }
+      .relative-child {
+        position: relative;
+        width: 140px;
+        height: 100px;
+        background-color: red;
+        top: 10px;
+        left: 10px;
+      }
+
+      .absolute-parent {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        border: 1px solid;
+      }
+      .absolute-child {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        top: 10px;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="relative-parent">
+      <div class="relative-child"></div>
+    </div>
+
+    <div class="absolute-parent">
+      <div class="absolute-child"></div>
+    </div>
+  </body>
+</html>
