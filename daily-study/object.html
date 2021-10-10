@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const Parent = function (id, name) {
+        this.id = id;
+        this.name = name;
+
+        // 私有方法
+        function test() {
+          return this.name;
+        }
+
+        this.getId = function () {
+          return this.id;
+        };
+      };
+      Parent.prototype.getName = function () {
+        return this.name;
+      };
+      const p = new Parent(1, "12");
+      console.log(p.constructor);
+      class Child {
+        constructor(id, name) {
+          this.id = id;
+          this.name = name;
+        }
+      }
+      const c = new Child(10, 23);
+      console.log(c);
+
+      let a, b;
+      (function () {
+        const A = function () {
+          this.a = 1;
+          this.b = 3;
+        };
+        A.prototype.log = function () {
+          console.log(this.a + this.b);
+        };
+        a = new A();
+        b = new A();
+      })();
+      a.log();
+      b.log();
+      a.constructor.prototype.addFn = function () {
+        console.log(this.b - this.a);
+      };
+      a.addFn();
+      b.addFn();
+
+      const Book = (function () {
+        const bookNum = 0;
+        function getBookNum() {
+          console.log(this.bookNum);
+        }
+        const _book = function (name, price) {
+          this.name = name;
+          this.price = price;
+          this.getName = function () {
+            return this.name;
+          };
+          this.getPrice = function () {
+            return this.name;
+          };
+          _book.prototype = {
+            isJs: false,
+          };
+        };
+        return _book;
+      })();
+      console.log(Book);
+      let book = new Book(1,2);
+      console.log(book);
+    </script>
+  </body>
+</html>
