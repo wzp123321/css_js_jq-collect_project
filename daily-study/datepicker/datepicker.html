@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <!-- 小时 -->
+    <style>
+        .datepicker {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        .datepicker .datepicker-select {
+            width: 600px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 36px 0;
+        }
+
+        .datepicker .datepicker-select input {
+            width: 240px;
+        }
+
+        .datepicker .datepicker-select span {
+            display: inline-block;
+            margin: 0 24px;
+        }
+
+        .datepicker button {
+            width: 100px;
+            height: 32px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #06a5ff;
+            color: #fff;
+        }
+
+        .content {
+            border: solid #0094ff;
+            border-width: 1px 0px 0px 1px;
+            text-align: center;
+        }
+
+        .content .row span {
+            display: inline-block;
+            border: solid #0094ff;
+            border-width: 0px 1px 1px 0px;
+            padding: 10px 0px;
+            box-sizing: border-box;
+            height: 50px;
+            text-align: center;
+        }
+
+        .content .row .th {
+            font-weight: bold;
+            background: #66677c;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="datepicker">
+        <div class="datepicker-select">
+            <input type="text" class="form-control" id="beginTime" placeholder="请选择开始时间"></input>
+            <span>~</span>
+            <input type="text" class="form-control" id="endTime" placeholder="请选择结束时间"></input>
+        </div>
+        <button>确认</button>
+    </div>
+    <div class="container content">
+        <div class="row">
+            <span class="col-lg-4 th">时间段</span>
+            <span class="col-lg-4 th">比例</span>
+            <span class="col-lg-4 th">操作</span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_0</span>
+            <span class="col-lg-4">10</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="1">按钮1</button>
+                <button class="addBtn" data-id="1">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_1</span>
+            <span class="col-lg-4">11</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="2">按钮1</button>
+                <button class="addBtn" data-id="2">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_2</span>
+            <span class="col-lg-4">12</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="3">按钮1</button>
+                <button class="addBtn" data-id="3">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_3</span>
+            <span class="col-lg-4">13</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="4">按钮1</button>
+                <button class="addBtn" data-id="4">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_4</span>
+            <span class="col-lg-4">14</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="5">按钮1</button>
+                <button class="addBtn" data-id="5">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_5</span>
+            <span class="col-lg-4">15</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="6">按钮1</button>
+                <button class="addBtn" data-id="6">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_6</span>
+            <span class="col-lg-4">16</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="7">按钮1</button>
+                <button class="addBtn" data-id="7">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_7</span>
+            <span class="col-lg-4">17</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="8">按钮1</button>
+                <button class="addBtn" data-id="8">按钮2</button>
+            </span>
+        </div>
+        <div class="row tb">
+            <span class="col-lg-4">kevin_8</span>
+            <span class="col-lg-4">18</span>
+            <span class="col-lg-4">
+                <button class="editBtn" data-id="9">按钮1</button>
+                <button class="addBtn" data-id="9">按钮2</button>
+            </span>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 时间插件 -->
+<script type="text/javascript" src="./index.js"></script>
+<script>
+    $(function () {
+        $('.editBtn').on('click', (e) => {
+            const index = Number($(e.target).attr('data-id')) + 1;
+            const inputEle = document.createElement('input')
+            inputEle.className = 'inp';
+
+            $(`.content>.tb:nth-child(${index})>span:nth-child(2)`).empty()
+            $(`.content>.tb:nth-child(${index})>span:nth-child(2)`).append(inputEle)
+        })
+        $('.editBtn').on('click', (e) => {
+            const index = Number($(e.target).attr('data-id')) + 1;
+            const inputEle = document.createElement('input')
+            inputEle.className = 'inp';
+
+            $(`.content>.tb:nth-child(${index})>span:nth-child(2)`).empty()
+            $(`.content>.tb:nth-child(${index})>span:nth-child(2)`).append(inputEle)
+        })
+        //时间选择
+        $("#beginTime").hunterTimePicker();
+        $("#endTime").hunterTimePicker();
+        $(function () {
+            $('.datepicker button').on('click', () => {
+                console.log($("#beginTime").val());
+                console.log($("#endTime").val());
+            })
+        })
+
+    })
+
+    /**
+     * 数组扁平化
+     */
+    const arr = [{ id: 1, children: [{ id: 6, children: [{ id: 7, children: [{ id: 8 }] }] }] },
+    { id: 2, children: [{ id: 3 }, { id: 4 }] }, { id: 5 }];
+    function getArr(arr) {
+        return arr.reduce((newArr, curVal) => {
+            return !curVal || !curVal.children || curVal.children.length === 0 ?
+                [...newArr, curVal] : [...newArr, curVal, ...getArr(curVal.children)]
+        }, []);
+    }
+    console.log(getArr(arr), arr);
+
+</script>
+
+</html>
