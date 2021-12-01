@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">{{text}}</div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { ref } = Vue;
+        const App = {
+            setup() {
+                const text = ref('hello');
+                return { text }
+            }
+        }
+        debugger;
+        /**
+        // runtime-dom/src/index.ts
+        createApp
+            const app = ensureRenderer().createApp(...args) // 
+                // mount函数
+                app.mount = (containerOrSelector) => {
+                    const container = normalizeContainer(containerOrSelector);
+                    if (!container)
+                        return;
+                    const component = app._component;
+                    if (!isFunction(component) && !component.render && !component.template) {
+                        // __UNSAFE__
+                        // Reason: potential execution of JS expressions in in-DOM template.
+                        // The user must make sure the in-DOM template is trusted. If it's
+                        // rendered by the server, the template should not contain any user data.
+                        component.template = container.innerHTML;
+                    }
+                    // clear content before mounting
+                    container.innerHTML = '';
+                    const proxy = mount(container, false, container instanceof SVGElement);
+                    if (container instanceof Element) {
+                        container.removeAttribute('v-cloak');
+                        container.setAttribute('data-v-app', '');
+                    }
+                    return proxy;
+                };
+        */
+        Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>
