@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>justifycontent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 80%;
+            height: 400px;
+            background-color: aqua;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        div span {
+            order: 1;
+            width: 100px;
+            height: 100px;
+            background-color: blueviolet;
+            margin-right: 5px;
+        }
+
+        div span:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>justifycontent </h1>
+    <p>flex-start（默认值）：左对齐</p>
+    <p>flex-end：右对齐</p>
+    <p>center： 居中</p>
+    <p>space-between：两端对齐，项目之间的间隔都相等。</p>
+    <p>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</p>
+    <br />
+    <br />
+    <br />
+    <p>（1536-105-105-300）/（1+1+2+2）</p>
+    <div>
+        <span>1</span>
+        <span>2</span>
+        <span style="width:300px">3</span>
+    </div>
+</body>
+
+</html>

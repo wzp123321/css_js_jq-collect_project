@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>direction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 80%;
+            height: 400px;
+            background-color: aqua;
+            display: flex;
+            flex-direction: row;
+        }
+
+        div span {
+            order: 1;
+            width: 100px;
+            height: 100px;
+            background-color: blueviolet;
+            margin-right: 5px;
+        }
+        div span:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>direction</h1>
+    <div>
+        <span>1</span>
+        <span>2</span>
+        <span style="width:300px">3</span>
+    </div>
+</body>
+
+</html>
